@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os 
 import rest_framework
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-59ypo4haeua1bei61jtr030fp+5=xtbv9+flf##by@e87xv)=e'
+SECRET_KEY = 'django-insecure-59ypo4haeua1bei61jtr030fp+5=xtbv9+flf##by@e87xv)=e' #Change this 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,6 +43,11 @@ INSTALLED_APPS = [
     'rest_framework.authtoken', #Custom signup 
     'corsheaders',
     'api', #Enclose all apps inside api 
+    'api.category',
+    'api.product',
+    'api.user',
+    'api.order',
+    'api.payment', 
 ]
 
 MIDDLEWARE = [
@@ -125,7 +131,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CORS_ORIGIN_ALLOW_ALL = True 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CORS_ORIGIN_ALLOW_ALL = True #Suitable in development environment.
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -133,6 +142,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Django Rest Framework with django.contrib.auth default classes 
+AUTH_USER_MODEL= "user.CustomUser"
 
 REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -142,7 +152,7 @@ REST_FRAMEWORK = {
             ],
 
         'DEFAULT_PERMISSION_CLASSES': [
-            'rest_framework.permission.DjangoModelPermissionsOrAnonReadOnly' 
+            'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly' 
             ]
         }
 
