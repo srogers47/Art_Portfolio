@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = [] #Include any fields imperative to user bussiness processess here. 
     phone = models.CharField(max_length=20, blank=True, null=True) 
 
-    session_token = models.CharField(max_length=10, default=0) #Can make this number higher.
+    session_token = models.CharField(max_length=20, default=0) #Can make this number higher.
 
     created_at = models.DateTimeField(auto_now_add=True) 
     updated_at = models.DateTimeField(auto_now=True) 
